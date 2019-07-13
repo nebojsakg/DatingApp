@@ -1,6 +1,5 @@
 import { AlertifyService } from './../_services/alertify.service';
 import { AuthService } from './../_services/auth.service';
-import { logging } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -12,14 +11,9 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(
-    public authService: AuthService,
-    private alertify: AlertifyService,
-    private router: Router
-    ) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   login() {
     this.authService.login(this.model).subscribe(
