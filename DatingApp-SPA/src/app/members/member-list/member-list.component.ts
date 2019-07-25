@@ -18,7 +18,7 @@ export class MemberListComponent implements OnInit {
   genderList = [{ value: 'male', display: 'Male' }, { value: 'female', display: 'Female' }];
   userParams: any = {};
 
-  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) {}
+  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -29,6 +29,7 @@ export class MemberListComponent implements OnInit {
     this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
+    this.userParams.orderBy = 'lastActive';
   }
 
   pageChanged(event: any): void {
