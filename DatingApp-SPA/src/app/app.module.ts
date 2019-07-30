@@ -9,9 +9,11 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule, BsDropdownModule, ButtonsModule, PaginationModule, TabsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { TimeAgoPipe } from 'time-ago-pipe';
+
 import { ErrorInterceptorProvider } from './../../error.interceptopr';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { ListsResolver } from './_resolvers/lists.resolver';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
@@ -81,7 +83,8 @@ function tokenGetter() {
     MemberDetailResolver,
     MemberEditResolver,
     MemberListResolver,
-    PreventUnsavedChanges
+    PreventUnsavedChanges,
+    ListsResolver
   ],
   bootstrap: [AppComponent]
 })
