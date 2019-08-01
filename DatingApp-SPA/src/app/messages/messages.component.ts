@@ -15,7 +15,7 @@ import { AuthService } from './../_services/auth.service';
 export class MessagesComponent implements OnInit {
   messages: Message[];
   pagination: Pagination;
-  messagecontainer = 'Unread';
+  messageContainer = 'Unread';
 
   constructor(
     private userService: UserService,
@@ -37,7 +37,7 @@ export class MessagesComponent implements OnInit {
         this.authService.decodedToken.nameid,
         this.pagination.currentPage,
         this.pagination.itemsPerPage,
-        this.messagecontainer
+        this.messageContainer
       )
       .subscribe(
         (res: PaginatedResult<Message[]>) => {
