@@ -14,9 +14,14 @@ import { PaginatedResult } from './../_models/pagination';
 export class UserService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getUsers(page?: number, itemsPerPage?: number, userParams?: any, likesParam?: any): Observable<PaginatedResult<User[]>> {
+  getUsers(
+    page?: number,
+    itemsPerPage?: number,
+    userParams?: any,
+    likesParam?: any
+  ): Observable<PaginatedResult<User[]>> {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
 
     let params = new HttpParams();
@@ -83,8 +88,7 @@ export class UserService {
       params = params.append('pageSize', itemsPerPage.toString());
     }
 
-    return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages', {observe: 'response', params})
-    .pipe(
+    return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages', { observe: 'response', params }).pipe(
       map(response => {
         paginatedResult.result = response.body;
         if (response.headers.get('Pagination')) {
@@ -97,5 +101,17 @@ export class UserService {
 
   getMessageThread(id: number, recipientId: number) {
     return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
+  }
+
+  sendMessage(id: number, message: Message) {
+    return this.http.post(this.baseUrl + 'users/' + id + '/messages', message);
+  }
+
+  deleteMessage(id: number, userId: number) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + id, {});
+  }
+
+  markAsRead(userId: number, messageId: number) {
+    this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {}).subscribe();
   }
 }
